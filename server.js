@@ -18,7 +18,7 @@ const pusher = new Pusher({
 
 // middleware 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 // database config
 const connection_url = 'mongodb+srv://koonzinc:SL484W02rgEpMXkO@cluster0.rdupyvg.mongodb.net/?retryWrites=true&w=majority'
@@ -40,7 +40,9 @@ db.once('open', () => {
             pusher.trigger('messages', 'inserted',
                 {
                     name: messageDetails.name,
-                    message: messageDetails.message
+                    message: messageDetails.message,
+                    timestamp: messageDetails.timestamp,
+                    received: messageDetails.received
                 }
             );
         } else {
